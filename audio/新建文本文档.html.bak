@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>无标题文档</title>
+<style>
+#play{ width:200px; height:30px; text-align:center; line-height:30px; background-color:#CCCCCC; float:left;}
+</style>
+</head>
+<body>
+<div  onmouseover="this.style.cursor='pointer';" onclick="playmp3();">点击播放</div>
+
+<div style="display:none" id="play">
+ 
+ 
+</div>
+
+<script>
+	/*音效处理*/
+    var myPlay=function(m){
+      if(isSound){
+        if(m.paused||m.ended){
+          m.play();
+        }else{
+          m.currentTime=0;
+        }
+      }   
+    }
+    var isSound=true;
+    var mBg=document.getElementById("m_bg");
+    mBg.src="music/1.mp3";
+    mBg.loop=true;
+    mBg.play();
+    
+    var mBird=document.getElementById("m_bird");
+    mBird.addEventListener("canplay",function(){
+      ie.start();
+      this.play();
+    },false);
+    mBird.src="music/bird.mp3";
+    
+    var mJob=document.getElementById("m_job");
+    mJob.src="music/job_eft.mp3";
+    var jobBtns=document.getElementById("classify_box").getElementsByClassName("job_feed");
+    for(var i=0;i<jobBtns.length;i++){
+      jobBtns[i].addEventListener("mouseenter",function(){
+        myPlay(mJob);
+      },false)
+    }
+
+    var mKey=document.getElementById("m_key");
+    mKey.src="music/key.mp3";
+
+    var btnSound=document.getElementById("btn_sound");
+    btnSound.addEventListener("click",function(){
+      if(isSound){
+        isSound=false;
+        this.className="btn_sound btn_no_sound";
+        mBg.pause();
+        if(!mBird.ended)
+          mBird.pause();
+      }else{
+        isSound=true;
+        this.className="btn_sound";
+        mBg.play();
+      }
+    },false);
+</script>
+
+<script>
+function playmp3(){
+var player=" <audio src='' id='m_bg'></audio>";
+//“1.mp3”路径，自己改。loop=-1 循环播放。
+document.getElementById("play").innerHTML=player;
+
+/*音效处理*/
+    var myPlay=function(m){
+      if(isSound){
+        if(m.paused||m.ended){
+          m.play();
+        }else{
+          m.currentTime=0;
+        }
+      }   
+    }
+    var isSound=true;
+    var mBg=document.getElementById("m_bg");
+    mBg.src="music/1.mp3";
+    mBg.loop=true;
+    mBg.play();
+}
+
+
+</script>
+
+</body>
+</html>
+
+
+
+
